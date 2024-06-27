@@ -7,6 +7,7 @@ import { getMerkleProof } from '@metaplex-foundation/js';
 
 const DEFAULT_GUARD_NAME = null;
 export const MintNFTs = ({ onClusterChange }) => {
+  const whitelisted_wallets = require("../../sugar/asset-generator/whitelistWallets.json")
   const allowList = [
     {
       groupName: "OG",
@@ -17,10 +18,7 @@ export const MintNFTs = ({ onClusterChange }) => {
     },
     {
       groupName: "WL",
-      wallets: [
-        "BiNq6rHVRQzWEVJeftQw3dYG5w3xLQSkFYFMXo2U8LEM",
-        "J7kHHBb9PrER4ugR8f539em7BzUCEYmzuHfdEWHxxs3H"
-      ],
+      wallets: whitelisted_wallets,
     },
   ];
 
@@ -500,3 +498,5 @@ export const MintNFTs = ({ onClusterChange }) => {
     </div>
   );
 };
+
+export default MintNFTs;

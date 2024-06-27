@@ -1,5 +1,5 @@
 {
-  "number": 2,
+  "number": 10,
   "symbol": "KPCS1",
   "sellerFeeBasisPoints": 0,
   "isMutable": true,
@@ -67,7 +67,7 @@
             "limit": 1
           },
           "allowList": {
-            "merkleRoot": "157b66de4afdacacf25c982f9c599fb5aa3c2f548d618c32d4d40cfaa02c9cc8"
+            "merkleRoot": "046d05001581a2fa79d64a34511fa391d39e9d723576778d551584fb5d142ebd"
           }
         }
       }

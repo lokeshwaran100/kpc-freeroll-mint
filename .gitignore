@@ -8,7 +8,13 @@ app/.DS_Store
 sugar/sugarCM3
 sugar/Owner.json
 sugar/Creator.json
+sugar/cache.json
 sugar/*.log
 sugar/*.deb
+sugar/assets/*.jpg
+sugar/assets/*.json
+
+sugar/asset-generator/dist
+sugar/asset-generator/node_modules
 
 notes-nftminting.txt
