@@ -24,7 +24,24 @@ import keyStrokes from '../public/images/Key Strokes.jpeg'
 import Image from 'next/image';
 
 export default function Home() {
-  const [network, setNetwork] = useState(WalletAdapterNetwork.Devnet);
+
+  let solana_network = WalletAdapterNetwork.Devnet;
+  switch (process.env.NEXT_PUBLIC_SOLANA_NETWORK) {
+    case "devnet":
+      solana_network = WalletAdapterNetwork.Devnet;
+      break;
+    case "mainnet":
+      solana_network = WalletAdapterNetwork.Mainnet;
+      break;
+    case "testnet":
+      solana_network = WalletAdapterNetwork.Testnet;
+      break;
+    default:
+      solana_network = WalletAdapterNetwork.Devnet;
+      break;
+  };
+
+  const [network, setNetwork] = useState(solana_network);
 
   const endpoint = useMemo(() => clusterApiUrl(network), [network]);
 
@@ -38,23 +55,6 @@ export default function Home() {
     ],
     [network]
   );
-
-  const handleChange = (event) => {
-    switch (event.target.value) {
-      case "devnet":
-        setNetwork(WalletAdapterNetwork.Devnet);
-        break;
-      case "mainnet":
-        setNetwork(WalletAdapterNetwork.Mainnet);
-        break;
-      case "testnet":
-        setNetwork(WalletAdapterNetwork.Testnet);
-        break;
-      default:
-        setNetwork(WalletAdapterNetwork.Devnet);
-        break;
-    }
-  };
 
   const ButtonWrapper = dynamic(() =>
     import('@solana/wallet-adapter-react-ui', { ssr: false }).then((mod) => mod.WalletMultiButton)
@@ -74,7 +74,7 @@ export default function Home() {
             <MetaplexProvider>
               <div className={styles.App}>
                 <ButtonWrapper />
-                <MintNFTs onClusterChange={handleChange} />
+                <MintNFTs />
               </div>
             </MetaplexProvider>
           </WalletModalProvider>

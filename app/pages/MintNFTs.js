@@ -6,7 +6,7 @@ import { PublicKey } from "@solana/web3.js";
 import { getMerkleProof } from '@metaplex-foundation/js';
 
 const DEFAULT_GUARD_NAME = null;
-export const MintNFTs = ({ onClusterChange }) => {
+export const MintNFTs = () => {
   const whitelisted_wallets = require("../../sugar/asset-generator/whitelistWallets.json")
   const allowList = [
     {
@@ -443,7 +443,7 @@ export const MintNFTs = ({ onClusterChange }) => {
 
   return (
     <div>
-      <div className={styles.container}>
+      {/*<div className={styles.container}>
         <div className={styles.inlineContainer}>
           <h1 className={styles.title}>Network: </h1>
           <select onChange={onClusterChange} className={styles.dropdown}>
@@ -452,7 +452,7 @@ export const MintNFTs = ({ onClusterChange }) => {
             <option value="testnet">Testnet</option>
           </select>
         </div>
-        {/* {
+        {
           groups.length > 0 &&
           (
             <div className={styles.inlineContainer}>
@@ -468,8 +468,8 @@ export const MintNFTs = ({ onClusterChange }) => {
               </select>
             </div>
           )
-        } */}
-      </div>
+        } 
+      </div>*/}
       <div>
         <div className={styles.container}>
           <h1 className={styles.title}>NFT Mint Address: {nft ? nft.mint.address.toBase58() : "Nothing Minted yet"}</h1>
