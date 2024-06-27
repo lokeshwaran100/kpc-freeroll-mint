@@ -1,0 +1,34 @@
+{
+  "program": {
+    "candyMachine": "AhXe8Zwt5nLWyesbX46R82E1MuwCCwrQsvJm2FUknBDq",
+    "candyGuard": "EduGkzKCyro8TmQ3XZ7S19mSuwB4QjvYjbahphnh2AXi",
+    "candyMachineCreator": "GQFEpoUjvgj2zCYHvS1knLUfUvpKdUPUyECkwvaMwA1U",
+    "collectionMint": "HrzeM2Y6brvo1dLN5NLJyV8y7QBN9cY1PAUp42K5vGvo"
+  },
+  "items": {
+    "-1": {
+      "name": "KPC Freeroll Season 1",
+      "image_hash": "bbcaba0f5cf9ae434fc57d3b32b25509ecc9eba27bf09e278659a1f05b972626",
+      "image_link": "https://arweave.net/xvz0h0wAJeS75R32-IAS5Wc-GYzulc-73pP2uKFZd2k?ext=jpg",
+      "metadata_hash": "3e1f6753a768066297ed5d833a7d82c28215daca45dc54f54adf17a1ccc0884b",
+      "metadata_link": "https://arweave.net/3nQSvJhs9460AwVnYoJD2UWMly3UB8zGTWUI_5cevwQ",
+      "onChain": true
+    },
+    "0": {
+      "name": "KPC S1 0",
+      "image_hash": "f8a4881e5bf7acfdf13aaac5b2be4e1d628d3fd11da5b6655bf897533a19306d",
+      "image_link": "https://arweave.net/AWJuxy9AEi4KNDJKZM1WUbGGYGzEXTGkMS7Gbfu1DgA?ext=jpg",
+      "metadata_hash": "1c9723e5983ea220529e5ca0f184fa6706ef7b554f53bbf7ff182f3e5f78012f",
+      "metadata_link": "https://arweave.net/5oJe9JiPLJzDp4kAECVt_NAjYD6NSd0SFoaQJtjaJVs",
+      "onChain": true
+    },
+    "1": {
+      "name": "KPC S1 1",
+      "image_hash": "f8a4881e5bf7acfdf13aaac5b2be4e1d628d3fd11da5b6655bf897533a19306d",
+      "image_link": "https://arweave.net/Ip-rF3ACoUr_sG9rgKu4GvFN3RizZSbMsR1XOjEmmno?ext=jpg",
+      "metadata_hash": "19f786aa3371327504cc8062a5dc77df87cd785ddf49d67e355637cfcaeff534",
+      "metadata_link": "https://arweave.net/iRkvuUduFwC4RJiZjcXw2-6g0xb5BbJWfEVeHvHZklo",
+      "onChain": true
+    }
+  }
+}

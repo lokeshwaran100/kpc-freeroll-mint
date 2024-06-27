@@ -1,0 +1,14 @@
+_archive
+app/.next
+app/build
+app/node_modules
+app/.env
+app/.DS_Store
+
+sugar/sugarCM3
+sugar/Owner.json
+sugar/Creator.json
+sugar/*.log
+sugar/*.deb
+
+notes-nftminting.txt

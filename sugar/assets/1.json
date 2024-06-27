@@ -1,0 +1,14 @@
+{
+    "name": "KPC S1 1",
+    "description": "KPC Freeroll Season 1 NFT",
+    "image": "1.jpg",
+    "symbol": "KPCS1",
+    "properties": {
+        "files": [
+            {
+                "uri": "1.jpg",
+                "type": "image/jpg"
+            }
+        ]
+    }
+}

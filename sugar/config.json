@@ -1,0 +1,76 @@
+{
+  "number": 2,
+  "symbol": "KPCS1",
+  "sellerFeeBasisPoints": 0,
+  "isMutable": true,
+  "isSequential": false,
+  "creators": [
+    {
+      "address": "8yJbdzeKLw3f3cEh82L9fXZaYonnY9SU2TYr7NmB3kJT",
+      "share": 100
+    }
+  ],
+  "uploadMethod": "bundlr",
+  "awsConfig": null,
+  "nftStorageAuthToken": null,
+  "shdwStorageAccount": null,
+  "pinataConfig": null,
+  "hiddenSettings": null,
+  "guards": {
+    "default": {},
+    "groups": [
+      {
+        "label": "OG",
+        "guards": {
+          "solPayment": {
+            "value": 0.1,
+            "destination": "8yJbdzeKLw3f3cEh82L9fXZaYonnY9SU2TYr7NmB3kJT"
+          },
+          "startDate": {
+            "date": "2024-02-12T03:00:00Z"
+          },
+          "endDate": {
+            "date": "2024-11-12T03:00:00Z"
+          },
+          "botTax": {
+            "value": 0.1,
+            "lastInstruction": true
+          },
+          "mintLimit": {
+            "id": 1,
+            "limit": 1
+          },
+          "allowList": {
+            "merkleRoot": "673c032026cd52f3b2911ed04f10c834138d04f3b2ba7a42eafe9a42e7436650"
+          }
+        }
+      },
+      {
+        "label": "WL",
+        "guards": {
+          "solPayment": {
+            "value": 0.1,
+            "destination": "8yJbdzeKLw3f3cEh82L9fXZaYonnY9SU2TYr7NmB3kJT"
+          },
+          "startDate": {
+            "date": "2024-02-12T03:00:00Z"
+          },
+          "endDate": {
+            "date": "2024-11-12T03:00:00Z"
+          },
+          "botTax": {
+            "value": 0.1,
+            "lastInstruction": true
+          },
+          "mintLimit": {
+            "id": 2,
+            "limit": 1
+          },
+          "allowList": {
+            "merkleRoot": "157b66de4afdacacf25c982f9c599fb5aa3c2f548d618c32d4d40cfaa02c9cc8"
+          }
+        }
+      }
+    ]
+  }
+}
