@@ -20,7 +20,6 @@ import { MetaplexProvider } from "../MetaplexProvider";
 import { MintNFTs } from "./MintNFTs";
 import "@solana/wallet-adapter-react-ui/styles.css";
 import dynamic from 'next/dynamic';
-import keyStrokes from '../public/images/Key Strokes.jpeg'
 import Image from 'next/image';
 
 export default function Home() {
@@ -71,45 +70,22 @@ export default function Home() {
 
   return (
     <div>
-      <div className={styles.keystrokesContainer}>
-        <div className={styles.inlineContainer}>
-          <div className={styles.simpleContainer}>
-          </div>
-        </div>
-      </div>
       <ConnectionProvider endpoint={endpoint}>
         <WalletProvider wallets={wallets} autoConnect>
           <WalletModalProvider>
             <MetaplexProvider>
-              <div className={styles.App}>
-                <ButtonWrapper />
-                <MintNFTs />
-              </div>
-              {/* <div style={{
-      backgroundColor: '#ff5722',
-      minHeight: '100vh',
-      padding: '5% 2.5%',
-      boxSizing: 'border-box'
-    }}>
-      <div style={{
-        backgroundColor: '#333',
-        borderRadius: '10px',
-        margin: '0 auto',
-        padding: '20px',
-        color: '#FFF',
-        minHeight: '80vh'
-      }}>
-        <header style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
-          <div style={{ fontSize: '24px', fontWeight: 'bold' }}>Scott.</div>
-          <nav>
-            <a href="#" style={{ margin: '0 10px' }}>Home</a>
-            <a href="#" style={{ margin: '0 10px' }}>About</a>
-            <a href="#" style={{ margin: '0 10px' }}>Discover</a>
-            <a href="#" style={{ margin: '0 10px' }}>Collection</a>
-            <a href="#" style={{ margin: '0 10px' }}>FAQ</a>
-            <button style={{ margin: '0 10px' }}>Connect</button>
-          </nav>
-        </header>
+              <div className={styles.newContainer}>
+      <div className={styles.navbar}>
+        <header className={styles.header}>
+  <div style={{ fontSize: '24px', fontWeight: 'bold' }}>
+    <img src="/fallbackImage.png" alt="Logo" style={{ height: '40px' }} />
+  </div>
+  <nav>
+    <a href="#" style={{ margin: '0 10px' }}>Home</a>
+    <a href="#" style={{ margin: '0 10px' }}>FAQ</a>
+    <ButtonWrapper />
+  </nav>
+</header>
         <main style={{ display: 'flex' }}>
           <div style={{ flex: 1 }}>
             <Image
@@ -126,55 +102,31 @@ export default function Home() {
               Public Mint is <span style={{ backgroundColor: '#4caf50', padding: '5px 10px', borderRadius: '5px', display: 'inline-block' }}>Live</span>
             </p>
             <p>Ends in: <strong>72d:20h:43m:33s</strong></p>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '5%' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <div style={{ flex: 1 }}>
                 <p>Price</p>
-                <p><strong>2.69 ETH</strong></p>
+                <p><strong>2.69 SOL</strong></p>
               </div>
               <div style={{ flex: 1 }}>
                 <p>Remaining</p>
                 <p><strong>634/899</strong></p>
               </div>
             </div>
-            <p>Quantity: <strong>{quantity}</strong></p>
-            <div>
-              <button onClick={decreaseQuantity} style={{
-                backgroundColor: '#ff5722',
-                padding: '5px 10px',
-                border: 'none',
-                borderRadius: '5px',
-                color: '#FFF',
-                cursor: 'pointer',
-                marginRight: '10px'
-              }}>
-                -
-              </button>
-              <button onClick={increaseQuantity} style={{
-                backgroundColor: '#ff5722',
-                padding: '5px 10px',
-                border: 'none',
-                borderRadius: '5px',
-                color: '#FFF',
-                cursor: 'pointer'
-              }}>
-                +
-              </button>
-            </div>
-             <button style={{
-              backgroundColor: '#ff5722',
-              padding: '10px 20px',
-              border: 'none',
-              borderRadius: '5px',
-              color: '#FFF',
-              cursor: 'pointer',
-              marginTop: '20px'
-            }}> 
-              <MintNFTs />
-             </button> 
+            <div style={{ display: 'flex', alignItems: 'center', marginTop: '10px' }}>
+  <p style={{ marginRight: '10px' }}>Quantity </p>
+  <button onClick={decreaseQuantity} className={styles.quantButton}>
+    -
+  </button>
+  <span style={{fontWeight: "bold"}}><strong>{quantity}&nbsp; </strong></span>
+  <button onClick={increaseQuantity} className={styles.quantButton}>
+     +
+  </button>
+</div>
+                <MintNFTs />
           </div>
         </main>
       </div>
-    </div> */}
+    </div>
             </MetaplexProvider>
           </WalletModalProvider>
         </WalletProvider>

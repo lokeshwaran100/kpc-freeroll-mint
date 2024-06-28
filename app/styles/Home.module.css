@@ -8,9 +8,7 @@
 }
 
 .container {
-  margin: auto;
   width: 100%;
-  max-width: 500px;
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -19,7 +17,7 @@
 
 .simpleContainer {
   max-width: 500px;
-  padding: 1rem;
+  /* padding: 1rem; */
 }
 
 .inlineContainer {
@@ -32,7 +30,7 @@
   text-align: left;
   font-size: 15px;
   font-weight: 500;
-  color: #0f172a;
+  color: #eaedf4;
 }
 
 .largerTitle {
@@ -49,7 +47,7 @@
 }
 
 .imageContainer {
-  width: 20vh;
+  /* width: 20vh; */
   position: relative;
 }
 
@@ -127,4 +125,36 @@
 .dropdown {
   padding:5px;
   margin:5px;
+}
+
+.newContainer {
+  background-color: yellow;
+  min-height: 100vh;
+  padding: 3% 1.5%;
+  box-sizing: border-box;
+}
+
+.navbar {
+  background-color: #333;
+  border-radius: 10px;
+  margin: 0 auto;
+  padding: 20px;
+  color: #FFF;
+  min-height: 80vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.quantButton {
+  background-color: #ff5722;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  color: #FFF;
+  cursor: pointer;
+  margin: 5px;
 }

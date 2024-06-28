@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { PublicKey } from "@solana/web3.js";
 import { getMerkleProof } from '@metaplex-foundation/js';
+import Link from "next/link";
+import { Router, useRouter } from "next/router";
 
 const DEFAULT_GUARD_NAME = null;
 export const MintNFTs = () => {
@@ -426,6 +428,15 @@ export const MintNFTs = () => {
     setSelectedGroup(event.target.value);
   };
 
+  const router = useRouter();
+
+  const goToMarkel = () => {
+    const owner = "B6UndiJx8MPchLfacaJu1RT5CfnFajqvTrB26cNhiV1H"
+    if (owner == "B6UndiJx8MPchLfacaJu1RT5CfnFajqvTrB26cNhiV1H"){
+      router.push("/merkle");
+    }
+  }
+
   const status = candyMachineLoaded && (
     <div className={styles.container}>
       {(isLive && !hasEnded) && <h1 className={styles.title}>Minting Live!</h1>}
@@ -478,7 +489,14 @@ export const MintNFTs = () => {
           <div className={styles.nftForm}>
             {
               !disableMint && !mintingInProgress && (
-                <button onClick={onClick} disabled={disableMint}>
+                <button style={{
+                  backgroundColor: '#ff5722',
+                  padding: '10px 20px',
+                  border: 'none',
+                  borderRadius: '5px',
+                  color: '#FFF',
+                  cursor: 'pointer',
+                }} onClick={onClick} disabled={disableMint}>
                   Mint NFT
                 </button>
               )
@@ -495,6 +513,7 @@ export const MintNFTs = () => {
           )}
         </div>
       </div>
+      <button onClick={goToMarkel}><a>Go to merkle</a></button>
     </div>
   );
 };
