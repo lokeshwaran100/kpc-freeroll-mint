@@ -1,5 +1,5 @@
 {
-  "number": 10,
+  "number": 20,
   "symbol": "KPCS1",
   "sellerFeeBasisPoints": 0,
   "isMutable": true,
@@ -17,23 +17,25 @@
   "pinataConfig": null,
   "hiddenSettings": null,
   "guards": {
-    "default": {},
+    "default": {
+      
+    },
     "groups": [
       {
-        "label": "OG",
+        "label": "WL",
         "guards": {
           "solPayment": {
-            "value": 0.1,
+            "value": 0.15,
             "destination": "8yJbdzeKLw3f3cEh82L9fXZaYonnY9SU2TYr7NmB3kJT"
           },
           "startDate": {
-            "date": "2024-02-12T03:00:00Z"
+            "date": "2023-06-28T18:30:00Z"
           },
           "endDate": {
-            "date": "2024-11-12T03:00:00Z"
+            "date": "2024-07-01T18:30:00Z"
           },
           "botTax": {
-            "value": 0.1,
+            "value": 0.002,
             "lastInstruction": true
           },
           "mintLimit": {
@@ -41,33 +43,30 @@
             "limit": 1
           },
           "allowList": {
-            "merkleRoot": "673c032026cd52f3b2911ed04f10c834138d04f3b2ba7a42eafe9a42e7436650"
+            "merkleRoot": "29befb7dd33c54b3e744d74062520d5aca9dae3a13ffd843501503e086b5df2b"
           }
         }
       },
       {
-        "label": "WL",
+        "label": "public",
         "guards": {
           "solPayment": {
-            "value": 0.1,
+            "value": 0.2,
             "destination": "8yJbdzeKLw3f3cEh82L9fXZaYonnY9SU2TYr7NmB3kJT"
           },
           "startDate": {
-            "date": "2024-02-12T03:00:00Z"
+            "date": "2023-07-01T18:30:00Z"
           },
           "endDate": {
-            "date": "2024-11-12T03:00:00Z"
+            "date": "2024-07-28T18:30:00Z"
           },
           "botTax": {
-            "value": 0.1,
+            "value": 0.002,
             "lastInstruction": true
           },
           "mintLimit": {
             "id": 2,
             "limit": 1
-          },
-          "allowList": {
-            "merkleRoot": "29befb7dd33c54b3e744d74062520d5aca9dae3a13ffd843501503e086b5df2b"
           }
         }
       }
