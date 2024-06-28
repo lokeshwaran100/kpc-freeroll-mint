@@ -36,7 +36,7 @@ export default function Home() {
       break;
   }
   const [network, setNetwork] = useState(solana_network);
-  
+
   const endpoint = useMemo(() => clusterApiUrl(network), [network]);
   const wallets = useMemo(
     () => [
@@ -62,41 +62,44 @@ export default function Home() {
               <div className={styles.newContainer} >
                 <div className={styles.navbar}>
                   <header className={styles.header}>
-                    <div style={{ fontSize: "24px", fontWeight: "bold" }}>
+                    <div style={{ fontSize: "24px", fontWeight: "bold", padding: 20 }}>
                       <img
-                        src="/fallbackImage.png"
+                        src="favicon.ico"
                         alt="Logo"
                         style={{ height: "40px" }}
                       />
                     </div>
                     <nav>
-                      <a href="#" style={{ margin: "0 10px" }}>
+                      {/* <a href="#" style={{ margin: "0 10px" }}>
                         Home
                       </a>
                       <a href="#" style={{ margin: "0 10px" }}>
                         FAQ
-                      </a>
+                      </a> */}
                       <ButtonWrapper />
                     </nav>
                   </header>
                   <main style={{ display: "flex" }}>
-                    <div style={{ flex: 1 }}>
+                    <div style={{ flex: 1, padding: 20 }}>
                       <Image
-                        src="/fallbackImage.jpg"
+                        src="/images/nft.gif"
                         alt="Random Image"
                         width={300}
                         height={300}
                         style={{ borderRadius: "10px" }}
                       />
                     </div>
-                    <MintNFTs />
+
+                    <div style={{ flex: 1, padding: 20 }}>
+                      <MintNFTs />
+                    </div>
                   </main>
                 </div>
               </div>
             </MetaplexProvider>
           </WalletModalProvider>
         </WalletProvider>
-      </ConnectionProvider>
-    </div>
+      </ConnectionProvider >
+    </div >
   );
 }

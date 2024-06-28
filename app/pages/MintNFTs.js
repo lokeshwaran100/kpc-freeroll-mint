@@ -12,13 +12,6 @@ export const MintNFTs = () => {
   const whitelisted_wallets = require("../../asset/whitelist-wallets.json")
   const allowList = [
     {
-      groupName: "OG",
-      wallets: [
-        "Hc8wfcBfKamkALs7DHNbdSQPythmnQ5VghYwJf7jCNWd",
-        "2jffCBBqZw8SNSgZW2AxruZmFkXGmmQF6XtiVXWsgPgp"
-      ],
-    },
-    {
       groupName: "WL",
       wallets: whitelisted_wallets,
     },
@@ -55,7 +48,9 @@ export const MintNFTs = () => {
 
   const [price, setPrice] = useState(0);
   const [endTime, setEndTime] = useState(0);
-  const [nftMinted, setNftMinted] = useState({minted: 0, total: 0})
+  const [nftMinted, setNftMinted] = useState({ minted: 0, total: 0 })
+
+  const [isWhitelisted, setIsWhitelisted] = useState(false);
 
   const candyMachineAddress = new PublicKey(
     process.env.NEXT_PUBLIC_CANDY_MACHINE_ID
@@ -63,9 +58,17 @@ export const MintNFTs = () => {
   let candyMachine;
   let walletBalance;
 
+  // useEffect(() => {
+  //   if (wallet.publicKey && wallet.publicKey.toString() == process.env.NEXT_PUBLIC_OWNER_ID) {
+  //     router.push("/merkle");
+  //   }
+  // }, [wallet])
+
   useEffect(() => {
-    if(wallet.publicKey && wallet.publicKey.toString() == process.env.NEXT_PUBLIC_OWNER_ID){
-      router.push("/merkle");
+    if (wallet.publicKey && whitelisted_wallets.includes(wallet.publicKey.toString())) {
+      setIsWhitelisted(true);
+    } else {
+      setIsWhitelisted(false);
     }
   }, [wallet])
 
@@ -164,8 +167,10 @@ export const MintNFTs = () => {
         setSelectedGroup(guardGroups[0]);
       }
     }
-    setNftMinted({minted: candyMachine.itemsMinted.toString(10), total: candyMachine.itemsMinted.toString(10) +
-      candyMachine.itemsAvailable.toString(10)})
+    setNftMinted({
+      minted: candyMachine.itemsMinted.toString(10), total: candyMachine.itemsMinted.toString(10) +
+        candyMachine.itemsAvailable.toString(10)
+    })
     // enough items available?
     if (
       candyMachine.itemsMinted.toString(10) -
@@ -203,7 +208,7 @@ export const MintNFTs = () => {
         setHasEnded(true);
         return;
       }
-      const time=formatTime((candyEndDate-solanaTime))
+      const time = formatTime((candyEndDate - solanaTime))
       setEndTime(time);
     }
 
@@ -243,7 +248,7 @@ export const MintNFTs = () => {
       );
 
       const costInLamports = guard.solPayment.amount.basisPoints.toString(10);
-      setPrice(costInLamports/1000000000);
+      setPrice(costInLamports / 1000000000);
 
       if (costInLamports > walletBalance) {
         console.error("solPayment: Not enough SOL!");
@@ -455,14 +460,14 @@ export const MintNFTs = () => {
     setSelectedGroup(event.target.value);
   };
 
-  const router = useRouter();
+  // const router = useRouter();
 
-  const goToMarkel = () => {
-    const owner = "B6UndiJx8MPchLfacaJu1RT5CfnFajqvTrB26cNhiV1H"
-    if (owner == "B6UndiJx8MPchLfacaJu1RT5CfnFajqvTrB26cNhiV1H"){
-      router.push("/merkle");
-    }
-  }
+  // const goToMarkel = () => {
+  //   const owner = "B6UndiJx8MPchLfacaJu1RT5CfnFajqvTrB26cNhiV1H"
+  //   if (owner == "B6UndiJx8MPchLfacaJu1RT5CfnFajqvTrB26cNhiV1H") {
+  //     router.push("/merkle");
+  //   }
+  // }
   const increaseQuantity = () => {
     setQuantity((prevQuantity) => prevQuantity + 1);
   };
@@ -478,7 +483,7 @@ export const MintNFTs = () => {
       {!isLive && <h1 className={styles.title}>Minting Not Live!</h1>} */}
       {!addressGateAllowedToMint && <h1 className={styles.title}>Wallet address not allowed to mint</h1>}
       {mintLimitReached && <h1 className={styles.title}>Minting limit reached</h1>}
-      {(!hasEnoughSol || !hasEnoughSolForFreeze) && <h1 className={styles.title} style={{marginLeft: "15%"}}>Insufficient SOL balance</h1>}
+      {(!hasEnoughSol || !hasEnoughSolForFreeze) && <h1 className={styles.title} style={{ marginLeft: "15%" }}>Insufficient SOL balance</h1>}
       {(!nftGatePass || missingNftBurnForPayment || missingNftForPayment) && <h1 className={styles.title}>Missing required NFT for minting</h1>}
       {isSoldOut && <h1 className={styles.title}>Sold out!</h1>}
       {isMaxRedeemed && <h1 className={styles.title}>Maximum amount of NFTs allowed to be minted has already been minted!</h1>}
@@ -487,41 +492,49 @@ export const MintNFTs = () => {
   );
 
   return (
-    <div style={{ flex: 1, marginLeft: "-30%" }}>
-                      <h2 style={{ fontSize: "15px", fontStyle: "italic" }}>
-                      KryptoPoker.io Freeroll Season 1
-                      </h2>
-                      <p style={{ fontSize: "20px" }}>
-                        Minting{" "}
-                        <span>
-                          {(isLive && !hasEnded) && <span>is <h1 className={styles.greenBox}> Live!</h1></span>}
-                          {(isLive && hasEnded) && <span>has <h1 className={styles.redBox}> Ended!</h1></span>}
-                          {!isLive && <h1 className={styles.orangeBox}> Not Live!</h1>}
-                        </span>
-                      </p>
-                      <p>
-                        Ends in: <strong>{endTime}</strong>
-                      </p>
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        <div style={{ flex: 1 }}>
-                          <p>Price</p>
-                          <p>
-                            <strong>{price} SOL</strong>
-                          </p>
-                        </div>
-                        <div style={{ flex: 1 }}>
-                          <p>Remaining</p>
-                          <p>
-                            <strong>{nftMinted.minted}/{nftMinted.total}</strong>
-                          </p>
-                        </div>
-                      </div>
-                      {/* <div
+    <>
+      <div style={{ flex: 1, marginUp: "50%", marginLeft: "-30%" }}>
+        <h3>
+          Your wallet is {!isWhitelisted ? " not " : ""} whitelisted
+        </h3>
+      </div >
+
+      {false &&
+        <div style={{ flex: 1, marginLeft: "-30%" }}>
+          <h2 style={{ fontSize: "15px", fontStyle: "italic" }}>
+            KryptoPoker.io Freeroll Season 1
+          </h2>
+          <p style={{ fontSize: "20px" }}>
+            Minting{" "}
+            <span>
+              {(isLive && !hasEnded) && <span>is <h1 className={styles.greenBox}> Live!</h1></span>}
+              {(isLive && hasEnded) && <span>has <h1 className={styles.redBox}> Ended!</h1></span>}
+              {!isLive && <h1 className={styles.orangeBox}> Not Live!</h1>}
+            </span>
+          </p>
+          <p>
+            Ends in: <strong>{endTime}</strong>
+          </p>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <div style={{ flex: 1 }}>
+              <p>Price</p>
+              <p>
+                <strong>{price} SOL</strong>
+              </p>
+            </div>
+            <div style={{ flex: 1 }}>
+              <p>Remaining</p>
+              <p>
+                <strong>{nftMinted.minted}/{nftMinted.total}</strong>
+              </p>
+            </div>
+          </div>
+          {/* <div
                         style={{
                           display: "flex",
                           alignItems: "center",
@@ -545,7 +558,7 @@ export const MintNFTs = () => {
                           +
                         </button>
                       </div> */}
-      {/*<div className={styles.container}>
+          {/*<div className={styles.container}>
         <div className={styles.inlineContainer}>
           <h1 className={styles.title}>Network: </h1>
           <select onChange={onClusterChange} className={styles.dropdown}>
@@ -572,41 +585,42 @@ export const MintNFTs = () => {
           )
         } 
       </div>*/}
-      <div>
-        
-        <div className={styles.container}>
-          <h1 className={styles.title}>NFT Mint Address: {nft ? nft.mint.address.toBase58() : "Nothing Minted yet"}</h1>
-          {disableMint && status}
-          {mintingInProgress && <h1 className={styles.title}>Minting In Progress!</h1>}
-          <div className={styles.nftForm}>
-            {
-               (
-                <button style={{
-                  backgroundColor: (disableMint || mintingInProgress) ? '#edb62b' : "#514929",
-                  padding: '10px 20px',
-                  border: 'none',
-                  borderRadius: '5px',
-                  color: '#FFF',
-                  cursor: 'pointer',
-                }} onClick={onClick} disabled={disableMint || mintingInProgress}>
-                  Mint NFT
-                </button>
-              )
-            }
-          </div>
-          {nft && (
-            <div className={styles.nftPreview}>
-              <h1>{nft.name}</h1>
-              <img
-                src={nft?.json?.image || "/fallbackImage.jpg"}
-                alt="The downloaded illustration of the provided NFT address."
-              />
+          <div>
+
+            <div className={styles.container}>
+              <h1 className={styles.title}>NFT Mint Address: {nft ? nft.mint.address.toBase58() : "Nothing Minted yet"}</h1>
+              {disableMint && status}
+              {mintingInProgress && <h1 className={styles.title}>Minting In Progress!</h1>}
+              <div className={styles.nftForm}>
+                {
+                  (
+                    <button style={{
+                      backgroundColor: (disableMint || mintingInProgress) ? '#edb62b' : "#514929",
+                      padding: '10px 20px',
+                      border: 'none',
+                      borderRadius: '5px',
+                      color: '#FFF',
+                      cursor: 'pointer',
+                    }} onClick={onClick} disabled={disableMint || mintingInProgress}>
+                      Mint NFT
+                    </button>
+                  )
+                }
+              </div>
+              {nft && (
+                <div className={styles.nftPreview}>
+                  <h1>{nft.name}</h1>
+                  <img
+                    src={nft?.json?.image || "/fallbackImage.jpg"}
+                    alt="The downloaded illustration of the provided NFT address."
+                  />
+                </div>
+              )}
             </div>
-          )}
-        </div>
-      </div>
-      {/* <button onClick={goToMarkel}><a>Go to merkle</a></button> */}
-    </div>
+          </div>
+          {/* <button onClick={goToMarkel}><a>Go to merkle</a></button> */}
+        </div>}
+    </>
   );
 };
 
