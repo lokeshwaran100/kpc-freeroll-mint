@@ -9,7 +9,7 @@ import { Router, useRouter } from "next/router";
 
 const DEFAULT_GUARD_NAME = null;
 export const MintNFTs = () => {
-  const whitelisted_wallets = require("../../sugar/asset-generator/whitelistWallets.json")
+  const whitelisted_wallets = require("../../asset/whitelist-wallets.json")
   const allowList = [
     {
       groupName: "OG",
@@ -28,6 +28,8 @@ export const MintNFTs = () => {
   const wallet = useWallet();
 
   const [nft, setNft] = useState(null);
+
+  const [quantity, setQuantity] = useState(1);
 
   const [isLive, setIsLive] = useState(true)
   const [hasEnded, setHasEnded] = useState(false)
@@ -51,11 +53,21 @@ export const MintNFTs = () => {
   const [selectedGroup, setSelectedGroup] = useState("WL");
   const [candyMachineLoaded, setCandyMachineLoaded] = useState(false);
 
+  const [price, setPrice] = useState(0);
+  const [endTime, setEndTime] = useState(0);
+  const [nftMinted, setNftMinted] = useState({minted: 0, total: 0})
+
   const candyMachineAddress = new PublicKey(
     process.env.NEXT_PUBLIC_CANDY_MACHINE_ID
   );
   let candyMachine;
   let walletBalance;
+
+  useEffect(() => {
+    if(wallet.publicKey && wallet.publicKey.toString() == process.env.NEXT_PUBLIC_OWNER_ID){
+      router.push("/merkle");
+    }
+  }, [wallet])
 
   const getGuard = (selectedGroup, candyMachine) => {
     if (selectedGroup == DEFAULT_GUARD_NAME) {
@@ -80,6 +92,16 @@ export const MintNFTs = () => {
     }
     checkEligibility();
   }, [selectedGroup, mintingInProgress])
+
+  const formatTime = (time) => {
+    const days = Math.floor(time / 86400);
+    const hours = Math.floor((time % 86400) / 3600);
+    const minutes = Math.floor((time % 3600) / 60);
+    const seconds = time % 60;
+
+    return `${days}d ${hours}h ${minutes}m ${seconds}s`;
+  };
+
 
   const addListener = async () => {
     // The below listeners were getting too noisy, and resulting in 429's from Solana endpoints.
@@ -109,6 +131,7 @@ export const MintNFTs = () => {
 
     // also reevaluate eligibility after endDate is reached
     const endDateGuard = getGuard(selectedGroup, candyMachine).endDate;
+
     if (endDateGuard != null) {
       const candyEndDate = endDateGuard.date.toString(10);
       const refreshTime = solanaTime.toString(10) - candyEndDate;
@@ -141,7 +164,8 @@ export const MintNFTs = () => {
         setSelectedGroup(guardGroups[0]);
       }
     }
-
+    setNftMinted({minted: candyMachine.itemsMinted.toString(10), total: candyMachine.itemsMinted.toString(10) +
+      candyMachine.itemsAvailable.toString(10)})
     // enough items available?
     if (
       candyMachine.itemsMinted.toString(10) -
@@ -179,6 +203,8 @@ export const MintNFTs = () => {
         setHasEnded(true);
         return;
       }
+      const time=formatTime((candyEndDate-solanaTime))
+      setEndTime(time);
     }
 
     if (guard.addressGate != null) {
@@ -217,6 +243,7 @@ export const MintNFTs = () => {
       );
 
       const costInLamports = guard.solPayment.amount.basisPoints.toString(10);
+      setPrice(costInLamports/1000000000);
 
       if (costInLamports > walletBalance) {
         console.error("solPayment: Not enough SOL!");
@@ -436,15 +463,22 @@ export const MintNFTs = () => {
       router.push("/merkle");
     }
   }
-
+  const increaseQuantity = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1);
+  };
+  const decreaseQuantity = () => {
+    if (quantity > 1) {
+      setQuantity((prevQuantity) => prevQuantity - 1);
+    }
+  };
   const status = candyMachineLoaded && (
     <div className={styles.container}>
-      {(isLive && !hasEnded) && <h1 className={styles.title}>Minting Live!</h1>}
+      {/* {(isLive && !hasEnded) && <h1 className={styles.title}>Minting Live!</h1>}
       {(isLive && hasEnded) && <h1 className={styles.title}>Minting End!</h1>}
-      {!isLive && <h1 className={styles.title}>Minting Not Live!</h1>}
+      {!isLive && <h1 className={styles.title}>Minting Not Live!</h1>} */}
       {!addressGateAllowedToMint && <h1 className={styles.title}>Wallet address not allowed to mint</h1>}
       {mintLimitReached && <h1 className={styles.title}>Minting limit reached</h1>}
-      {(!hasEnoughSol || !hasEnoughSolForFreeze) && <h1 className={styles.title}>Insufficient SOL balance</h1>}
+      {(!hasEnoughSol || !hasEnoughSolForFreeze) && <h1 className={styles.title} style={{marginLeft: "15%"}}>Insufficient SOL balance</h1>}
       {(!nftGatePass || missingNftBurnForPayment || missingNftForPayment) && <h1 className={styles.title}>Missing required NFT for minting</h1>}
       {isSoldOut && <h1 className={styles.title}>Sold out!</h1>}
       {isMaxRedeemed && <h1 className={styles.title}>Maximum amount of NFTs allowed to be minted has already been minted!</h1>}
@@ -453,7 +487,64 @@ export const MintNFTs = () => {
   );
 
   return (
-    <div>
+    <div style={{ flex: 1, marginLeft: "-30%" }}>
+                      <h2 style={{ fontSize: "15px", fontStyle: "italic" }}>
+                      KryptoPoker.io Freeroll Season 1
+                      </h2>
+                      <p style={{ fontSize: "20px" }}>
+                        Minting{" "}
+                        <span>
+                          {(isLive && !hasEnded) && <span>is <h1 className={styles.greenBox}> Live!</h1></span>}
+                          {(isLive && hasEnded) && <span>has <h1 className={styles.redBox}> Ended!</h1></span>}
+                          {!isLive && <h1 className={styles.orangeBox}> Not Live!</h1>}
+                        </span>
+                      </p>
+                      <p>
+                        Ends in: <strong>{endTime}</strong>
+                      </p>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <div style={{ flex: 1 }}>
+                          <p>Price</p>
+                          <p>
+                            <strong>{price} SOL</strong>
+                          </p>
+                        </div>
+                        <div style={{ flex: 1 }}>
+                          <p>Remaining</p>
+                          <p>
+                            <strong>{nftMinted.minted}/{nftMinted.total}</strong>
+                          </p>
+                        </div>
+                      </div>
+                      {/* <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          marginTop: "10px",
+                        }}
+                      >
+                        <p style={{ marginRight: "10px" }}>Quantity </p>
+                        <button
+                          onClick={decreaseQuantity}
+                          className={styles.quantButton}
+                        >
+                          -
+                        </button>
+                        <span style={{ fontWeight: "bold" }}>
+                          <strong>{quantity}&nbsp; </strong>
+                        </span>
+                        <button
+                          onClick={increaseQuantity}
+                          className={styles.quantButton}
+                        >
+                          +
+                        </button>
+                      </div> */}
       {/*<div className={styles.container}>
         <div className={styles.inlineContainer}>
           <h1 className={styles.title}>Network: </h1>
@@ -482,21 +573,22 @@ export const MintNFTs = () => {
         } 
       </div>*/}
       <div>
+        
         <div className={styles.container}>
           <h1 className={styles.title}>NFT Mint Address: {nft ? nft.mint.address.toBase58() : "Nothing Minted yet"}</h1>
           {disableMint && status}
           {mintingInProgress && <h1 className={styles.title}>Minting In Progress!</h1>}
           <div className={styles.nftForm}>
             {
-              !disableMint && !mintingInProgress && (
+               (
                 <button style={{
-                  backgroundColor: '#ff5722',
+                  backgroundColor: (disableMint || mintingInProgress) ? '#edb62b' : "#514929",
                   padding: '10px 20px',
                   border: 'none',
                   borderRadius: '5px',
                   color: '#FFF',
                   cursor: 'pointer',
-                }} onClick={onClick} disabled={disableMint}>
+                }} onClick={onClick} disabled={disableMint || mintingInProgress}>
                   Mint NFT
                 </button>
               )
@@ -513,7 +605,7 @@ export const MintNFTs = () => {
           )}
         </div>
       </div>
-      <button onClick={goToMarkel}><a>Go to merkle</a></button>
+      {/* <button onClick={goToMarkel}><a>Go to merkle</a></button> */}
     </div>
   );
 };

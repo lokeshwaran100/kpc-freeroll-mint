@@ -2,9 +2,7 @@
 import styles1 from "../styles/Home.module.css";
 // var fs = require('fs');
 import { useState } from 'react';
-import {
-    getMerkleRoot,
-  } from "@metaplex-foundation/js";
+import { getMerkleRoot } from "@metaplex-foundation/mpl-candy-machine";
 
 export default function Merkle() {
   const [text, setText] = useState('');
