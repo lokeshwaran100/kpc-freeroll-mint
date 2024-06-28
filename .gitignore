@@ -6,6 +6,7 @@ app/.env
 app/.DS_Store
 
 sugar/sugarCM3
+sugar/sugar.exe
 sugar/Owner.json
 sugar/Creator.json
 sugar/cache.json
@@ -14,7 +15,7 @@ sugar/*.deb
 sugar/assets/*.jpg
 sugar/assets/*.json
 
-sugar/asset-generator/dist
-sugar/asset-generator/node_modules
+script/tmp
+script/Owner.json
 
 notes-nftminting.txt
