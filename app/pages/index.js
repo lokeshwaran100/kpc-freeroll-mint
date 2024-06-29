@@ -37,7 +37,7 @@ export default function Home() {
   }
   const [network, setNetwork] = useState(solana_network);
 
-  const endpoint = useMemo(() => "https://solana-mainnet.g.alchemy.com/v2/aEPjQzwixtPZRgOvmRrOn2vv98UZ8PNz", [network]);
+  const endpoint = useMemo(() => "https://solana-mainnet.g.alchemy.com/v2/zSn2q3qI3qT1Vo0PbPqlkpOWWgJGU69C", [network]);
   const wallets = useMemo(
     () => [
       new PhantomWalletAdapter(),
