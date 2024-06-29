@@ -32,6 +32,7 @@
   font-weight: 500;
   color: #eaedf4;
   justify-content: center;
+
 }
 
 .largerTitle {
@@ -124,8 +125,8 @@
 }
 
 .dropdown {
-  padding:5px;
-  margin:5px;
+  padding: 5px;
+  margin: 5px;
 }
 
 .newContainer {
@@ -138,7 +139,7 @@
   width: 100vw; /* Full width of the viewport */
   /* height: 100vh; */
   /* padding: 3% 1.5%; */
-  /* box-sizing: border-box; */ 
+  /* box-sizing: border-box; */
   /* background-size: contain; */
   /* background-position: center;  */
 
@@ -157,11 +158,11 @@
   background-attachment: fixed;
   margin: 0; */
 
-  position: absolute;
-  top: 5%;
-  left: 5%;
-  width: 90%;
-  height: 90%;
+  /* position: absolute; */
+  /* top: 5%; */
+  /* left: 5%; */
+  width: 100%;
+  height: 100%;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -212,6 +213,7 @@
   font-weight: 500;
   color: #eaedf4;
 }
+
 .orangeBox {
   background-color: orange;
   padding: 5px 10px;
