@@ -686,7 +686,7 @@ export const MintNFTs = () => {
                       borderRadius: '5px',
                       color: '#FFF',
                       cursor: 'pointer',
-                    }} onClick={onClick} disabled={disableMint || mintingInProgress}>
+                    }} onClick={onClick} disabled={mintingInProgress}>
                       Mint NFT
                     </button>
                   )
