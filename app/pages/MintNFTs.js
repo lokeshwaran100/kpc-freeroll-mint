@@ -492,15 +492,13 @@ export const MintNFTs = () => {
   );
 
   return (
-    <>
-      <div style={{ flex: 1, marginUp: "50%", marginLeft: "-30%" }}>
+    <div style={{ flex: 2, marginLeft: "5px"  }}>
         <h3>
           Your wallet is {!isWhitelisted ? " not " : ""} whitelisted
         </h3>
-      </div >
 
-      {false &&
-        <div style={{ flex: 1, marginLeft: "-30%" }}>
+      {true &&
+        <span >
           <h2 style={{ fontSize: "15px", fontStyle: "italic" }}>
             KryptoPoker.io Freeroll Season 1
           </h2>
@@ -518,7 +516,7 @@ export const MintNFTs = () => {
           <div
             style={{
               display: "flex",
-              justifyContent: "space-between",
+              // justifyContent: "center",
             }}
           >
             <div style={{ flex: 1 }}>
@@ -619,8 +617,8 @@ export const MintNFTs = () => {
             </div>
           </div>
           {/* <button onClick={goToMarkel}><a>Go to merkle</a></button> */}
-        </div>}
-    </>
+        </span>}
+    </div>
   );
 };
 

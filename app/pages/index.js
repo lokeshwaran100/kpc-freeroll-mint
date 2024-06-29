@@ -36,7 +36,7 @@ export default function Home() {
       break;
   }
   const [network, setNetwork] = useState(solana_network);
-
+  
   const endpoint = useMemo(() => clusterApiUrl(network), [network]);
   const wallets = useMemo(
     () => [
@@ -61,7 +61,7 @@ export default function Home() {
             <MetaplexProvider>
                 <div className={styles.navbar}>
                   <header className={styles.header}>
-                    <div style={{ fontSize: "24px", fontWeight: "bold", padding: 20 }}>
+                    <div style={{ fontSize: "24px", fontWeight: "bold" }}>
                       <img
                         src="favicon.ico"
                         alt="Logo"
@@ -87,19 +87,18 @@ export default function Home() {
                         alt="Random Image"
                         width={300}
                         height={300}
-                        style={{ borderRadius: "10px" }}
+                        style={{ borderRadius: "10px", display: "block",
+                          maxWidth: "100%",
+                          height: "auto" }}
                       />
                     </div>
-
-                    <div style={{ flex: 1, padding: 20 }}>
-                      <MintNFTs />
-                    </div>
+                    <MintNFTs />
                   </main>
                 </div>
             </MetaplexProvider>
           </WalletModalProvider>
         </WalletProvider>
-      </ConnectionProvider >
-    </div >
+      </ConnectionProvider>
+    </div>
   );
 }
