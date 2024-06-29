@@ -496,13 +496,25 @@ export const MintNFTs = () => {
     // style={{ flex: 2, marginLeft: "5px"  }}
     className={styles.div2}
     >
-        <h2>
+        {/* <h2>
           Your wallet is {!isWhitelisted ? " not " : ""} whitelisted
-        </h2>
-
-      {false &&
+        </h2> */}
+        {/* <span>
+        
+</span> */}
+      {true &&
         <span >
-          <h2 style={{ fontSize: "15px", fontStyle: "italic" }}>
+          <button style={{
+                      backgroundColor: '#edb62b',
+                      padding: '10px 20px',
+                      border: 'none',
+                      borderRadius: '5px',
+                      color: '#FFF',
+                      cursor: 'pointer',
+                    }} onClick={onClick} >
+                        Check whitelisted
+                    </button>
+          <h2 style={{ fontSize: "15px", fontStyle: "italic", padding: "5px", border: "3px solid rgb(134, 113, 52" }}>
             KryptoPoker.io Freeroll Season 1
           </h2>
           <p style={{ fontSize: "20px" }}>

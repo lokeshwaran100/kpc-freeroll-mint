@@ -241,14 +241,13 @@
 .container1 {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  gap: 10px; /* Adjust the gap between columns if needed */
+  gap: 10px; 
 }
 
 .container1 > div {
-  padding: 20px; /* Optional: Padding for visual spacing */
   display: flex;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
 }
 
 .div1 {
@@ -268,6 +267,7 @@
 
   .div1, .div2 {
     width: 100%;
+    justify-content: center;
   }
   .header {
     margin-top: 35px;
