@@ -492,12 +492,15 @@ export const MintNFTs = () => {
   );
 
   return (
-    <div style={{ flex: 2, marginLeft: "5px"  }}>
-        <h3>
+    <div 
+    // style={{ flex: 2, marginLeft: "5px"  }}
+    className={styles.div2}
+    >
+        <h2>
           Your wallet is {!isWhitelisted ? " not " : ""} whitelisted
-        </h3>
+        </h2>
 
-      {true &&
+      {false &&
         <span >
           <h2 style={{ fontSize: "15px", fontStyle: "italic" }}>
             KryptoPoker.io Freeroll Season 1

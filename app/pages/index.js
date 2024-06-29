@@ -78,10 +78,16 @@ export default function Home() {
                       <ButtonWrapper />
                     </nav>
                   </header>
-                  <main style={{ display: "flex" }}>
-                    <div style={{ flex: 1, display: "inline-block",
-                                  position: "relative",
-                                  overflow: "hidden" }}>
+                  <main 
+                  // style={{ display: "flex" }}
+                  className={styles.container1}
+                  >
+                    <div 
+                    // style={{ flex: 1, display: "inline-block",
+                    //               position: "relative",
+                    //               overflow: "hidden" }}
+                    className={styles.div1}
+                                  >
                       <Image
                         src="/images/nft.gif"
                         alt="Random Image"

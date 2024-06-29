@@ -30,8 +30,7 @@ export default function Merkle() {
   };
 
   return (
-    <div className={styles1.newContainer}>
-      <div className={styles.navbar}>
+    <div className={styles.box}>
         <div style={styles.container}>
           <div style={styles.header}>
             <h1>Merkle Root Calculator For Metaplex Candy Machine</h1>
@@ -54,7 +53,6 @@ export default function Merkle() {
             </button>
           </div>
         </div>
-      </div>
     </div>
   );
 }

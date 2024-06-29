@@ -237,3 +237,39 @@
   background-attachment: fixed;
   background-position: center;
 }
+
+.container1 {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 10px; /* Adjust the gap between columns if needed */
+}
+
+.container1 > div {
+  padding: 20px; /* Optional: Padding for visual spacing */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.div1 {
+  flex: 1;
+}
+
+.div2 {
+  flex: 2;
+}
+
+/* Media query for mobile screens */
+@media (max-width: 608px) {
+  .container1 {
+    grid-template-columns: 1fr; /* Single column layout for mobile */
+    grid-template-rows: auto auto; /* Stack the divs vertically */
+  }
+
+  .div1, .div2 {
+    width: 100%;
+  }
+  .header {
+    margin-top: 35px;
+  }
+}
