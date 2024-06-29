@@ -1,12 +1,12 @@
 {
-  "number": 20,
-  "symbol": "KPCS1",
+  "number": 5,
+  "symbol": "KPCS0",
   "sellerFeeBasisPoints": 0,
   "isMutable": true,
   "isSequential": false,
   "creators": [
     {
-      "address": "8yJbdzeKLw3f3cEh82L9fXZaYonnY9SU2TYr7NmB3kJT",
+      "address": "4FfHuEy97CkjwBaXvccUJfTMe3v8q7kbBaLafcvZoAxi",
       "share": 100
     }
   ],
@@ -26,10 +26,10 @@
         "guards": {
           "solPayment": {
             "value": 0.15,
-            "destination": "8yJbdzeKLw3f3cEh82L9fXZaYonnY9SU2TYr7NmB3kJT"
+            "destination": "4FfHuEy97CkjwBaXvccUJfTMe3v8q7kbBaLafcvZoAxi"
           },
           "startDate": {
-            "date": "2023-06-28T18:30:00Z"
+            "date": "2023-06-29T18:30:00Z"
           },
           "endDate": {
             "date": "2024-07-01T18:30:00Z"
@@ -43,7 +43,7 @@
             "limit": 1
           },
           "allowList": {
-            "merkleRoot": "29befb7dd33c54b3e744d74062520d5aca9dae3a13ffd843501503e086b5df2b"
+            "merkleRoot": "cb085c213008acd6d291fc2957a46f961f71f2b0456d2a74682dda082e9bb498"
           }
         }
       },
@@ -52,7 +52,7 @@
         "guards": {
           "solPayment": {
             "value": 0.2,
-            "destination": "8yJbdzeKLw3f3cEh82L9fXZaYonnY9SU2TYr7NmB3kJT"
+            "destination": "4FfHuEy97CkjwBaXvccUJfTMe3v8q7kbBaLafcvZoAxi"
           },
           "startDate": {
             "date": "2023-07-01T18:30:00Z"
