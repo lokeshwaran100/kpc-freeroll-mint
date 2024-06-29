@@ -6,7 +6,7 @@
   "isSequential": false,
   "creators": [
     {
-      "address": "8yJbdzeKLw3f3cEh82L9fXZaYonnY9SU2TYr7NmB3kJT",
+      "address": "EwpdGKcRP1bEGfJFKUdCxe6bXNBpELyzoQ6CYamGqKLJ",
       "share": 100
     }
   ],
@@ -26,10 +26,10 @@
         "guards": {
           "solPayment": {
             "value": 0.15,
-            "destination": "8yJbdzeKLw3f3cEh82L9fXZaYonnY9SU2TYr7NmB3kJT"
+            "destination": "EwpdGKcRP1bEGfJFKUdCxe6bXNBpELyzoQ6CYamGqKLJ"
           },
           "startDate": {
-            "date": "2023-06-28T18:30:00Z"
+            "date": "2023-06-29T18:30:00Z"
           },
           "endDate": {
             "date": "2024-07-01T18:30:00Z"
@@ -52,7 +52,7 @@
         "guards": {
           "solPayment": {
             "value": 0.2,
-            "destination": "8yJbdzeKLw3f3cEh82L9fXZaYonnY9SU2TYr7NmB3kJT"
+            "destination": "EwpdGKcRP1bEGfJFKUdCxe6bXNBpELyzoQ6CYamGqKLJ"
           },
           "startDate": {
             "date": "2023-07-01T18:30:00Z"
