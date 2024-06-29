@@ -2,7 +2,49 @@ param (
     [string]$network = "mainnet"
 )
 
+$CONFIG_PATH = "../sugar/config.json"
 $keypairFile = "Owner.json"
+
+
+function UpdatedCreatorAddress {
+    param (
+        [string]$address,
+        [string]$configPath
+    )
+
+    $config = Get-Content -Path $configPath -Raw | ConvertFrom-Json
+
+    $config = Get-Content -Path $configPath | ConvertFrom-Json
+    $config.creators | ForEach-Object {
+        if($_.address) {
+            $_.address = $address
+        }
+    }
+    $config.guards.groups | ForEach-Object {
+        if ($_.guards.solPayment -and $_.guards.solPayment.destination) {
+            $_.guards.solPayment.destination = $address
+        }
+    }
+    $config = $config | ConvertTo-Json -Depth 10 | Format-Json
+    $config | Set-Content -Path $configPath -Force
+    Write-Output "Updated ${configPath} with the creator wallet address."
+}
+
+function Format-Json([Parameter(Mandatory, ValueFromPipeline)][String] $json) {
+    $indent = 0;
+    ($json -Split "`n" | % {
+        if ($_ -match '[\}\]]\s*,?\s*$') {
+            # This line ends with ] or }, decrement the indentation level
+            $indent--
+        }
+        $line = ('  ' * $indent) + $($_.TrimStart() -replace '":  (["{[])', '": $1' -replace ':  ', ': ')
+        if ($_ -match '[\{\[]\s*$') {
+            # This line ends with [ or {, increment the indentation level
+            $indent++
+        }
+        $line
+    }) -Join "`n"
+}
 
 try {
     # Check if keypair file exists
@@ -42,6 +84,9 @@ try {
 
     # Display current configuration for verification
     solana config get
+
+    # Update the creator address in config.json
+    UpdatedCreatorAddress -address $pubkey -configPath $CONFIG_PATH
 
     # Output the extracted pubkey and absolute path
     Write-Output ""

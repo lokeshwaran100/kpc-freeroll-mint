@@ -48,14 +48,15 @@ export const MintNFTs = () => {
 
   const [price, setPrice] = useState(0);
   const [endTime, setEndTime] = useState(0);
-  const [nftMinted, setNftMinted] = useState({ minted: 0, total: 0 })
+  const [nftMinted, setNftMinted] = useState(0)
 
   const [isWhitelisted, setIsWhitelisted] = useState(false);
+  const [candyMachine, setCandyMachine] = useState();
 
   const candyMachineAddress = new PublicKey(
     process.env.NEXT_PUBLIC_CANDY_MACHINE_ID
   );
-  let candyMachine;
+  // let candyMachine;
   let walletBalance;
 
   // useEffect(() => {
@@ -65,12 +66,40 @@ export const MintNFTs = () => {
   // }, [wallet])
 
   useEffect(() => {
+    const fetchCandyMachine = async () => {
+      let candy_machine = await metaplex
+        .candyMachines()
+        .findByAddress({ address: candyMachineAddress });
+      setCandyMachine(candy_machine)
+      console.log("setCandyMachine(candy_machine)")
+    }
     if (wallet.publicKey && whitelisted_wallets.includes(wallet.publicKey.toString())) {
       setIsWhitelisted(true);
+
     } else {
       setIsWhitelisted(false);
     }
+    if (wallet.publicKey) {
+      fetchCandyMachine();
+    }
+
   }, [wallet])
+
+  // useEffect(() => {
+  //   if (wallet) {
+  //     const fetchCandyMachine = async () => {
+  //       // read candy machine state from chain
+  //       let candyMachine = await metaplex
+  //         .candyMachines()
+  //         .findByAddress({ address: candyMachineAddress });
+
+  //       setCandyMachine(candyMachine);
+  //       setCandyMachineLoaded(true);
+  //     }
+  //     fetchCandyMachine()
+  //   }
+  // }, [wallet, metaplex])
+
 
   const getGuard = (selectedGroup, candyMachine) => {
     if (selectedGroup == DEFAULT_GUARD_NAME) {
@@ -93,8 +122,41 @@ export const MintNFTs = () => {
     if (mintingInProgress) {
       return;
     }
-    checkEligibility();
-  }, [selectedGroup, mintingInProgress])
+    console.log(candyMachine)
+    if (candyMachine) {
+      console.log("checkEligibility on selectedGroup, mintingInProgress, candyMachine")
+      checkEligibility();
+    }
+  }, [selectedGroup, mintingInProgress, candyMachine])
+
+  // useEffect(() => {
+  //   if (candyMachine === undefined) {
+  //     const checkE = async () => {
+  //       // read candy machine data to get the candy guards address
+  //       console.log("checkEligibility undefined")
+  //       await checkEligibility();
+  //       // Add listeners to refresh CM data to reevaluate if minting is allowed after the candy guard updates or startDate is reached
+  //       // addListener();
+  //     }
+  //     checkE()
+  //   }
+  // }, [candyMachine, wallet])
+
+  // useEffect(() => {
+  //   console.log("checkEligibility on page refresh")
+  //   const fetchCandyMachine = async () => {
+  //     // read candy machine state from chain
+  //     let candyMachine = await metaplex
+  //       .candyMachines()
+  //       .findByAddress({ address: candyMachineAddress });
+
+  //     setCandyMachine(candyMachine);
+  //     setCandyMachineLoaded(true);
+  //   }
+  //   fetchCandyMachine();
+  //   setTimeout(() => { }, 1000)
+  //   checkEligibility();
+  // }, [])
 
   const formatTime = (time) => {
     const days = Math.floor(time / 86400);
@@ -151,10 +213,21 @@ export const MintNFTs = () => {
       return;
     }
 
-    // read candy machine state from chain
-    candyMachine = await metaplex
-      .candyMachines()
-      .findByAddress({ address: candyMachineAddress });
+    // // read candy machine state from chain
+    // if (candyMachine === undefined) {
+    //   candyMachine = await metaplex
+    //     .candyMachines()
+    //     .findByAddress({ address: candyMachineAddress });
+    //   setCandyMachine(candyMachine)
+    //   console.log("setCandyMachine(candy_machine)")
+    //   // candyMachine = await metaplex
+    //   //   .candyMachines()
+    //   //   .findByAddress({ address: candyMachineAddress });
+
+    //   if (candyMachine === undefined) {
+    //     return;
+    //   }
+    // }
 
     setCandyMachineLoaded(true);
 
@@ -167,10 +240,7 @@ export const MintNFTs = () => {
         setSelectedGroup(guardGroups[0]);
       }
     }
-    setNftMinted({
-      minted: candyMachine.itemsMinted.toString(10), total: candyMachine.itemsMinted.toString(10) +
-        candyMachine.itemsAvailable.toString(10)
-    })
+    setNftMinted(candyMachine.itemsMinted)
     // enough items available?
     if (
       candyMachine.itemsMinted.toString(10) -
@@ -389,15 +459,16 @@ export const MintNFTs = () => {
   }
 
   // if it's the first time we are processing this function with a connected wallet we read the CM data and add Listeners
-  if (candyMachine === undefined) {
-    (async () => {
-      // read candy machine data to get the candy guards address
-      await checkEligibility();
-      // Add listeners to refresh CM data to reevaluate if minting is allowed after the candy guard updates or startDate is reached
-      addListener();
-    }
-    )();
-  }
+  // if (candyMachine === undefined) {
+  //   (async () => {
+  //     // read candy machine data to get the candy guards address
+  //     console.log("checkEligibility undefined")
+  //     await checkEligibility();
+  //     // Add listeners to refresh CM data to reevaluate if minting is allowed after the candy guard updates or startDate is reached
+  //     addListener();
+  //   }
+  //   )();
+  // }
 
   const onClick = async () => {
     setMintingInProgress(true);
@@ -476,30 +547,30 @@ export const MintNFTs = () => {
       setQuantity((prevQuantity) => prevQuantity - 1);
     }
   };
-  const status = candyMachineLoaded && (
-    <div className={styles.container}>
-      {/* {(isLive && !hasEnded) && <h1 className={styles.title}>Minting Live!</h1>}
-      {(isLive && hasEnded) && <h1 className={styles.title}>Minting End!</h1>}
-      {!isLive && <h1 className={styles.title}>Minting Not Live!</h1>} */}
-      {!addressGateAllowedToMint && <h1 className={styles.title}>Wallet address not allowed to mint</h1>}
-      {mintLimitReached && <h1 className={styles.title}>Minting limit reached</h1>}
-      {(!hasEnoughSol || !hasEnoughSolForFreeze) && <h1 className={styles.title} style={{ marginLeft: "15%" }}>Insufficient SOL balance</h1>}
-      {(!nftGatePass || missingNftBurnForPayment || missingNftForPayment) && <h1 className={styles.title}>Missing required NFT for minting</h1>}
-      {isSoldOut && <h1 className={styles.title}>Sold out!</h1>}
-      {isMaxRedeemed && <h1 className={styles.title}>Maximum amount of NFTs allowed to be minted has already been minted!</h1>}
-      {(!splTokenGatePass || noSplTokenToBurn || noSplTokenToPay || noSplTokenForFreeze) && <h1 className={styles.title}>Missing required SPL token for minting</h1>}
-    </div>
-  );
+  // const status = candyMachineLoaded && (
+  //   <div className={styles.container}>
+  //     {/* {(isLive && !hasEnded) && <h1 className={styles.title}>Minting Live!</h1>}
+  //     {(isLive && hasEnded) && <h1 className={styles.title}>Minting End!</h1>}
+  //     {!isLive && <h1 className={styles.title}>Minting Not Live!</h1>} */}
+  //     {!addressGateAllowedToMint && <h1 className={styles.title}>Wallet address not allowed to mint</h1>}
+  //     {mintLimitReached && <h1 className={styles.title}>Minting limit reached</h1>}
+  //     {(!hasEnoughSol || !hasEnoughSolForFreeze) && <h1 className={styles.title} style={{ marginLeft: "15%" }}>Insufficient SOL balance</h1>}
+  //     {(!nftGatePass || missingNftBurnForPayment || missingNftForPayment) && <h1 className={styles.title}>Missing required NFT for minting</h1>}
+  //     {isSoldOut && <h1 className={styles.title}>Sold out!</h1>}
+  //     {isMaxRedeemed && <h1 className={styles.title}>Maximum amount of NFTs allowed to be minted has already been minted!</h1>}
+  //     {(!splTokenGatePass || noSplTokenToBurn || noSplTokenToPay || noSplTokenForFreeze) && <h1 className={styles.title}>Missing required SPL token for minting</h1>}
+  //   </div>
+  // );
 
   return (
-    <div 
-    // style={{ flex: 2, marginLeft: "5px"  }}
-    className={styles.div2}
+    <div
+      // style={{ flex: 2, marginLeft: "5px"  }}
+      className={styles.div2}
     >
-        {/* <h2>
+      {/* <h2style={{ textAlign: "center" }}>
           Your wallet is {!isWhitelisted ? " not " : ""} whitelisted
         </h2> */}
-        {/* <span>
+      {/* <span>
         
 </span> */}
       {true &&
@@ -507,26 +578,26 @@ export const MintNFTs = () => {
           <h2 style={{ fontSize: "15px", fontStyle: "italic", padding: "5px", border: "3px solid rgb(134, 113, 52" }}>
             KryptoPoker.io Freeroll Season 1
           </h2>
-          <p style={{ fontSize: "20px" }}>
+          <div style={{ fontSize: "20px" }}>
             Minting{" "}
             <span>
               {(isLive && !hasEnded) && <span>is <h1 className={styles.greenBox}> Live!</h1></span>}
               {(isLive && hasEnded) && <span>has <h1 className={styles.redBox}> Ended!</h1></span>}
               {!isLive && <h1 className={styles.orangeBox}> Not Live!</h1>}
             </span>
-          </p>
+          </div>
           <p>
             Ends in: <strong>{endTime}</strong> &nbsp;
-            <button style={{
-                      backgroundColor: '#edb62b',
-                      padding: '10px 20px',
-                      border: 'none',
-                      borderRadius: '5px',
-                      color: '#FFF',
-                      cursor: 'pointer',
-                    }} onClick={onClick} >
-                        Check whitelisted
-                    </button>
+            {isWhitelisted && <button style={{
+              backgroundColor: '#edb62b',
+              padding: '10px 20px',
+              border: 'none',
+              borderRadius: '5px',
+              color: '#FFF',
+              cursor: 'pointer',
+            }} onClick={onClick} >
+              Whitelisted
+            </button>}
           </p>
           <div
             style={{
@@ -541,9 +612,9 @@ export const MintNFTs = () => {
               </p>
             </div>
             <div style={{ flex: 1 }}>
-              <p>Mounted Count &nbsp;&nbsp;</p>
+              <p>Total Minted&nbsp;&nbsp;</p>
               <p>
-                <strong>{nftMinted.minted}/{nftMinted.total} (1 max per wallet)</strong>
+                <strong>{nftMinted} (1 max per wallet)</strong>
               </p>
             </div>
           </div>
@@ -602,7 +673,7 @@ export const MintNFTs = () => {
 
             <div className={styles.container}>
               <h1 className={styles.title}>NFT Mint Address: {nft ? nft.mint.address.toBase58() : "Nothing Minted yet"}</h1>
-              {disableMint && status}
+              {disableMint}
               {mintingInProgress && <h1 className={styles.title}>Minting In Progress!</h1>}
               <div className={styles.nftForm}>
                 {

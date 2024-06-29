@@ -36,8 +36,8 @@ export default function Home() {
       break;
   }
   const [network, setNetwork] = useState(solana_network);
-  
-  const endpoint = useMemo(() => clusterApiUrl(network), [network]);
+
+  const endpoint = useMemo(() => "https://solana-mainnet.g.alchemy.com/v2/aEPjQzwixtPZRgOvmRrOn2vv98UZ8PNz", [network]);
   const wallets = useMemo(
     () => [
       new PhantomWalletAdapter(),
@@ -59,48 +59,50 @@ export default function Home() {
         <WalletProvider wallets={wallets} autoConnect>
           <WalletModalProvider>
             <MetaplexProvider>
-                <div className={styles.navbar}>
-                  <header className={styles.header}>
-                    <div style={{ fontSize: "24px", fontWeight: "bold" }}>
-                      <img
-                        src="favicon.ico"
-                        alt="Logo"
-                        style={{ height: "40px" }}
-                      />
-                    </div>
-                    <nav>
-                      {/* <a href="#" style={{ margin: "0 10px" }}>
+              <div className={styles.navbar}>
+                <header className={styles.header}>
+                  <div style={{ fontSize: "24px", fontWeight: "bold" }}>
+                    <img
+                      src="favicon.ico"
+                      alt="Logo"
+                      style={{ height: "40px" }}
+                    />
+                  </div>
+                  <nav>
+                    {/* <a href="#" style={{ margin: "0 10px" }}>
                         Home
                       </a>
                       <a href="#" style={{ margin: "0 10px" }}>
                         FAQ
                       </a> */}
-                      <ButtonWrapper />
-                    </nav>
-                  </header>
-                  <main 
+                    <ButtonWrapper />
+                  </nav>
+                </header>
+                <main
                   // style={{ display: "flex" }}
                   className={styles.container1}
-                  >
-                    <div 
+                >
+                  <div
                     // style={{ flex: 1, display: "inline-block",
                     //               position: "relative",
                     //               overflow: "hidden" }}
                     className={styles.div1}
-                                  >
-                      <Image
-                        src="/images/nft.gif"
-                        alt="Random Image"
-                        width={300}
-                        height={300}
-                        style={{ borderRadius: "10px", display: "block",
-                          maxWidth: "100%",
-                          height: "auto" }}
-                      />
-                    </div>
-                    <MintNFTs />
-                  </main>
-                </div>
+                  >
+                    <Image
+                      src="/images/nft.gif"
+                      alt="Random Image"
+                      width={300}
+                      height={300}
+                      style={{
+                        borderRadius: "10px", display: "block",
+                        maxWidth: "100%",
+                        height: "auto"
+                      }}
+                    />
+                  </div>
+                  <MintNFTs />
+                </main>
+              </div>
             </MetaplexProvider>
           </WalletModalProvider>
         </WalletProvider>
