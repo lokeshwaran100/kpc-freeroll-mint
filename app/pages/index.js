@@ -59,7 +59,6 @@ export default function Home() {
         <WalletProvider wallets={wallets} autoConnect>
           <WalletModalProvider>
             <MetaplexProvider>
-              <div className={styles.newContainer} >
                 <div className={styles.navbar}>
                   <header className={styles.header}>
                     <div style={{ fontSize: "24px", fontWeight: "bold" }}>
@@ -80,7 +79,9 @@ export default function Home() {
                     </nav>
                   </header>
                   <main style={{ display: "flex" }}>
-                    <div style={{ flex: 1 }}>
+                    <div style={{ flex: 1, display: "inline-block",
+                                  position: "relative",
+                                  overflow: "hidden" }}>
                       <Image
                         src="/fallbackImage.jpg"
                         alt="Random Image"
@@ -92,7 +93,6 @@ export default function Home() {
                     <MintNFTs />
                   </main>
                 </div>
-              </div>
             </MetaplexProvider>
           </WalletModalProvider>
         </WalletProvider>

@@ -487,7 +487,7 @@ export const MintNFTs = () => {
   );
 
   return (
-    <div style={{ flex: 1, marginLeft: "-30%" }}>
+    <div style={{ flex: 2, marginLeft: "5px"  }}>
                       <h2 style={{ fontSize: "15px", fontStyle: "italic" }}>
                       KryptoPoker.io Freeroll Season 1
                       </h2>

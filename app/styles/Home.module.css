@@ -12,7 +12,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: -20%;
+  /* margin-left: -20%; */
 }
 
 .simpleContainer {
@@ -32,7 +32,6 @@
   font-weight: 500;
   color: #eaedf4;
   justify-content: center;
-  
 }
 
 .largerTitle {
@@ -170,9 +169,7 @@
 }
 
 .navbar {
-  /* background-color: #333; */
-  border-radius: 10px;
-  margin: 0 auto;
+  margin: 2% 2%;
   padding: 20px;
   color: #FFF;
   min-height: 80vh;
@@ -227,12 +224,14 @@
 }
 
 .box {
+  position: absolute;
   margin: 0;
   padding: 0;
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* overflow: hidden; */
+  width: 100%;
+  height: 100%;
+  background-image: url('/backgroundImage.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
 }
