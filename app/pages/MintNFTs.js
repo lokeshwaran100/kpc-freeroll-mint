@@ -492,13 +492,13 @@ export const MintNFTs = () => {
   );
 
   return (
-    <div 
-    // style={{ flex: 2, marginLeft: "5px"  }}
-    className={styles.div2}
+    <div
+      // style={{ flex: 2, marginLeft: "5px"  }}
+      className={styles.div2}
     >
-        <h2>
-          Your wallet is {!isWhitelisted ? " not " : ""} whitelisted
-        </h2>
+      <h2 style={{ textAlign: "center" }}>
+        Your wallet is {!isWhitelisted ? " not " : ""} whitelisted
+      </h2>
 
       {false &&
         <span >
