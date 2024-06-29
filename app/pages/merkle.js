@@ -30,8 +30,8 @@ export default function Merkle() {
   };
 
   return (
-    <div className={styles.box}>
-        <div style={styles.container}>
+    <div className={styles1.box}>
+        <div className={styles1.navbar}>
           <div style={styles.header}>
             <h1>Merkle Root Calculator For Metaplex Candy Machine</h1>
           </div>
@@ -67,8 +67,12 @@ const styles = {
     height: '100vh',
     justifyContent: 'center'
   },
+
   header: {
     marginBottom: '20px',
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'center',
   },
   content: {
     display: 'flex',
