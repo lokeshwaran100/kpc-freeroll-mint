@@ -43,7 +43,7 @@ export const MintNFTs = () => {
   const [mintingInProgress, setMintingInProgress] = useState(false);
 
   const [groups, setGroups] = useState([]);
-  const [selectedGroup, setSelectedGroup] = useState("WL");
+  const [selectedGroup, setSelectedGroup] = useState("public");
   const [candyMachineLoaded, setCandyMachineLoaded] = useState(false);
 
   const [price, setPrice] = useState(0);
@@ -75,9 +75,10 @@ export const MintNFTs = () => {
     }
     if (wallet.publicKey && whitelisted_wallets.includes(wallet.publicKey.toString())) {
       setIsWhitelisted(true);
-
+      setSelectedGroup("WL");
     } else {
       setIsWhitelisted(false);
+      setSelectedGroup("public");
     }
     if (wallet.publicKey) {
       fetchCandyMachine();
@@ -240,7 +241,7 @@ export const MintNFTs = () => {
         setSelectedGroup(guardGroups[0]);
       }
     }
-    setNftMinted(candyMachine.itemsMinted)
+    setNftMinted(candyMachine.itemsMinted.toString())
     // enough items available?
     if (
       candyMachine.itemsMinted.toString(10) -
@@ -679,7 +680,7 @@ export const MintNFTs = () => {
                 {
                   (
                     <button style={{
-                      backgroundColor: (disableMint || mintingInProgress) ? '#edb62b' : "#514929",
+                      backgroundColor: (disableMint || mintingInProgress) ? "#514929" : '#edb62b',
                       padding: '10px 20px',
                       border: 'none',
                       borderRadius: '5px',
