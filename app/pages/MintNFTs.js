@@ -504,16 +504,6 @@ export const MintNFTs = () => {
 </span> */}
       {true &&
         <span >
-          <button style={{
-                      backgroundColor: '#edb62b',
-                      padding: '10px 20px',
-                      border: 'none',
-                      borderRadius: '5px',
-                      color: '#FFF',
-                      cursor: 'pointer',
-                    }} onClick={onClick} >
-                        Check whitelisted
-                    </button>
           <h2 style={{ fontSize: "15px", fontStyle: "italic", padding: "5px", border: "3px solid rgb(134, 113, 52" }}>
             KryptoPoker.io Freeroll Season 1
           </h2>
@@ -526,7 +516,17 @@ export const MintNFTs = () => {
             </span>
           </p>
           <p>
-            Ends in: <strong>{endTime}</strong>
+            Ends in: <strong>{endTime}</strong> &nbsp;
+            <button style={{
+                      backgroundColor: '#edb62b',
+                      padding: '10px 20px',
+                      border: 'none',
+                      borderRadius: '5px',
+                      color: '#FFF',
+                      cursor: 'pointer',
+                    }} onClick={onClick} >
+                        Check whitelisted
+                    </button>
           </p>
           <div
             style={{
@@ -541,9 +541,9 @@ export const MintNFTs = () => {
               </p>
             </div>
             <div style={{ flex: 1 }}>
-              <p>Remaining</p>
+              <p>Mounted Count &nbsp;&nbsp;</p>
               <p>
-                <strong>{nftMinted.minted}/{nftMinted.total}</strong>
+                <strong>{nftMinted.minted}/{nftMinted.total} (1 max per wallet)</strong>
               </p>
             </div>
           </div>
