@@ -117,7 +117,6 @@
   padding: 0.5rem 1rem;
   position: relative;
   margin-bottom: -22px;
-  transform: rotate(-5deg);
 }
 
 .nftPreview img {
@@ -241,10 +240,10 @@
 .container1 {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  gap: 10px; 
+  gap: 10px;
 }
 
-.container1 > div {
+.container1>div {
   display: flex;
   align-items: center;
   /* justify-content: center; */
@@ -261,14 +260,18 @@
 /* Media query for mobile screens */
 @media (max-width: 608px) {
   .container1 {
-    grid-template-columns: 1fr; /* Single column layout for mobile */
-    grid-template-rows: auto auto; /* Stack the divs vertically */
+    grid-template-columns: 1fr;
+    /* Single column layout for mobile */
+    grid-template-rows: auto auto;
+    /* Stack the divs vertically */
   }
 
-  .div1, .div2 {
+  .div1,
+  .div2 {
     width: 100%;
     justify-content: center;
   }
+
   .header {
     margin-top: 35px;
   }
