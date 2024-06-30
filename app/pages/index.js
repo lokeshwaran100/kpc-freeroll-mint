@@ -37,7 +37,9 @@ export default function Home() {
   }
   const [network, setNetwork] = useState(solana_network);
 
-  const endpoint = useMemo(() => "https://solana-mainnet.g.alchemy.com/v2/zSn2q3qI3qT1Vo0PbPqlkpOWWgJGU69C", [network]);
+  // const endpoint = useMemo(() => "https://solana-mainnet.g.alchemy.com/v2/zSn2q3qI3qT1Vo0PbPqlkpOWWgJGU69C", [network]);
+  // const endpoint = useMemo(() => "https://mainnet.helius-rpc.com", [network]);
+  const endpoint = useMemo(() => "https://rpc.shyft.to?api_key=65xrmka_d4ih15cv", [network]);
   const wallets = useMemo(
     () => [
       new PhantomWalletAdapter(),
