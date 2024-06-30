@@ -19,10 +19,10 @@ function CreateJsonFiles {
 
     for ($i = 0; $i -lt $count; $i++) {
         $jsonData = @{
-            name = "KPC S1 $i"
-            description = "KPC Freeroll Season 1 NFT"
+            name = "KryptoPoker.io FS 1 #$i"
+            description = "Access pass to freeroll season 1"
             image = "$i.jpg"
-            symbol = "KPCS1"
+            symbol = "KPCFS1"
             properties = @{
                 files = @(@{
                     uri = "$i.jpg"
@@ -42,10 +42,10 @@ function CreateJsonFiles {
     }
 
     $collectionJsonData = @{
-        name = "KPC Freeroll Season 1"
-        description = "A collection of KPC Freeroll Season 1 NFTs on Solana"
+        name = "KryptoPoker.io FS 1"
+        description = "Access pass to freeroll season 1"
         image = "collection.jpg"
-        symbol = "KPCS1"
+        symbol = "KPCFS1"
         properties = @{
             files = @(@{
                 uri = "collection.jpg"
