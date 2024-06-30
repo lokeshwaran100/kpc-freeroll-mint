@@ -693,11 +693,12 @@ export const MintNFTs = () => {
               </div>
               {nft && (
                 <div className={styles.nftPreview}>
+                  <p>Mint is successful</p>
                   <h1>{nft.name}</h1>
-                  <img
+                  {/* <img
                     src={nft?.json?.image || "/fallbackImage.jpg"}
                     alt="The downloaded illustration of the provided NFT address."
-                  />
+                  /> */}
                 </div>
               )}
             </div>

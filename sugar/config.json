@@ -17,7 +17,9 @@
   "pinataConfig": null,
   "hiddenSettings": null,
   "guards": {
-    "default": {},
+    "default": {
+      
+    },
     "groups": [
       {
         "label": "WL",
@@ -41,7 +43,7 @@
             "limit": 1
           },
           "allowList": {
-            "merkleRoot": "cb085c213008acd6d291fc2957a46f961f71f2b0456d2a74682dda082e9bb498"
+            "merkleRoot": "56d28ec643307232e659804d2d498953248585d9bef4d5282ac88a0d2b8d3e81"
           }
         }
       },
