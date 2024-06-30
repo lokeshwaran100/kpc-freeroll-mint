@@ -71,7 +71,6 @@ export const MintNFTs = () => {
         .candyMachines()
         .findByAddress({ address: candyMachineAddress });
       setCandyMachine(candy_machine)
-      console.log("setCandyMachine(candy_machine)")
     }
     if (wallet.publicKey && whitelisted_wallets.includes(wallet.publicKey.toString())) {
       setIsWhitelisted(true);
